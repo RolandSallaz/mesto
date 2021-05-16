@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="body">
+    <div class="page">
+        <header class="header">
+            <img src="./images/logo.svg" alt="Логотип 'Яндекс место'" class="logo logo_place_header">
+            <div class="header__line"></div>
+        </header>
+        <main class="content">
+            <section class="profile">
+                <img src="./images/profile__image.jpg" alt="Аватарка профиля" class="profile__avatar">
+                <div class="profile__info">
+                    <div class="profile__content">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <p class="profile__subtitle">Исследователь океана</p>
+                    </div>
+                    <button class="profile__edit-button"></button>
+                </div>
+
+                <button class="profile__add-button"></button>
+            </section>
+            <section class="elements">
+                <div class="element">
+                    <img src="./images/element__image-karachevsk.jpg" alt="очень старая заброшенная церковь на фоне леса" class="element__image">
+                    <div class="element__container">
+                        <h2 class="element__heading">Карачаевск</h2>
+                        <button class="element__like"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="./images/element__image-mounainElbrus.jpg" alt="гора эльбрус с закатом" class="element__image">
+                    <div class="element__container">
+                        <h2 class="element__heading">Гора эльбрус</h2>
+                        <button class="element__like"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="./images/element__image-dombai.jpg" alt="Гора домбай и лес" class="element__image">
+                    <div class="element__container">
+                        <h2 class="element__heading">Домбай</h2>
+                        <button class="element__like"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="./images/element__image-observatory.jpg" alt="Обсерватория на фоне звездного неба" class="element__image">
+                    <div class="element__container">
+                        <h2 class="element__heading">Обсерватория NOAO США</h2>
+                        <button class="element__like"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="./images/element__image-lakeTahoe.jpg" alt="Озеро Тахо" class="element__image">
+                    <div class="element__container">
+                        <h2 class="element__heading">Озеро Тахо</h2>
+                        <button class="element__like"></button>
+                    </div>
+                </div>
+                <div class="element">
+                    <img src="./images/element__image-forestTahoe.jpg" alt="Лес вокруг озера Тахо" class="element__image">
+                    <div class="element__container">
+                        <h2 class="element__heading">Леса озера Тахо</h2>
+                        <button class="element__like"></button>
+                    </div>
+                </div>
+
+            </section>
+            <section class="edit-form edit-form_hide">
+                <form class="form" name="form">
+                    <div class="form__container">
+                        <button class="form__close-button"></button>
+                        <div class="form__container"></div>
+                        <h2 class="form__title">Редактировать профиль</h2>
+                        <div class="form__field">
+                            <input type="text" class="form__input" name="form__input-name" value="Жак-Ив Кусто" required>
+                            <div class="form__line"></div>
+                        </div>
+                        <div class="form__field">
+                            <input type="text" class="form__input" name="form__input-subtitle" value="Исследователь океана" required>
+                            <div class="form__line"></div>
+                        </div>
+                        <button class="form__save-button" type="button">Сохранить</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
+        </footer>
+    </div>
+    <script src="./scripts/main.js"></script>
+</body>
+
+</html>
