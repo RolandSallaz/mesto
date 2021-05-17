@@ -13,7 +13,7 @@
     <div class="page">
         <header class="header">
             <img src="./images/logo.svg" alt="Логотип 'Яндекс место'" class="logo logo_place_header">
-            <div class="header__line"></div>
+
         </header>
         <main class="content">
             <section class="profile">
@@ -73,28 +73,23 @@
                 </div>
 
             </section>
-            <section class="edit-form edit-form_hide">
-                <form class="form" name="form">
-                    <div class="form__container">
-                        <button class="form__close-button" type="button"></button>
-                        <div class="form__container"></div>
-                        <h2 class="form__title">Редактировать профиль</h2>
-                        <div class="form__field">
-                            <input type="text" class="form__input" name="form__input-name" value="Жак-Ив Кусто" required>
-                            <div class="form__line"></div>
-                        </div>
-                        <div class="form__field">
-                            <input type="text" class="form__input" name="form__input-subtitle" value="Исследователь океана" required>
-                            <div class="form__line"></div>
-                        </div>
-                        <button class="form__save-button" type="button">Сохранить</button>
-                    </div>
-                </form>
-            </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
         </footer>
+        <div class="popup popup_hide">
+            <div class="popup__container">
+                <form class="form" name="form">
+                    <div class="form__container">
+                        <button class="form__close-button" type="button"></button>
+                        <h2 class="form__title">Редактировать профиль</h2>
+                        <input type="text" class="form__input" name="form__input-name" value="Жак-Ив Кусто" required>
+                        <input type="text" class="form__input" name="form__input-subtitle" value="Исследователь океана" required>
+                    </div>
+                </form>
+                <button class="popup__save-button" type="button">Сохранить</button>
+            </div>
+        </div>
     </div>
     <script src="./scripts/main.js"></script>
 </body>

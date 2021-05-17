@@ -1,7 +1,7 @@
-let editForm = document.querySelector('.edit-form');
+let popup = document.querySelector('.popup');
+let popupSaveButton = document.querySelector(".popup__save-button");
 let profileEditButton = document.querySelector(".profile__edit-button");
 let formCloseButton = document.querySelector(".form__close-button");
-let formSaveButton = document.querySelector(".form__save-button");
 let form = document.querySelectorAll(".form__input");
 let like = document.querySelectorAll(".element__like");
 
@@ -11,8 +11,8 @@ let profileSubtitle = document.querySelector(".profile__subtitle");
 
 
 profileEditButton.addEventListener("click", showEditForm);
-formCloseButton.addEventListener("click", closeEditForm);
-formSaveButton.addEventListener("click", formSave);
+formCloseButton.addEventListener("click", closePopup);
+popupSaveButton.addEventListener("click", formSave);
 
 for (let index = 0; index < like.length; index++) {
     like[index].addEventListener("click", function() {
@@ -20,17 +20,17 @@ for (let index = 0; index < like.length; index++) {
     });
 }
 
-function closeEditForm() {
-    editForm.classList.add("edit-form_hide");
+function closePopup() {
+    popup.classList.add("popup_hide");
 }
 
 function showEditForm() {
-    editForm.classList.remove("edit-form_hide");
+    popup.classList.remove("popup_hide");
 }
 
 function formSave() {
 
-    closeEditForm();
+    closePopup();
     profileName.textContent = form[0].value;
     profileSubtitle.textContent = form[1].value;
 
