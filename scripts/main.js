@@ -1,6 +1,6 @@
 const popup = document.querySelector('.popup');
 const profileEditButton = document.querySelector(".profile__edit-button");
-const formCloseButton = document.querySelector(".form__close-button");
+const popupCloseButton = document.querySelector(".popup__close-button");
 const popupForm = document.querySelector(".form");
 const formName = document.querySelector(".form__input_info_name");
 const formAbout = document.querySelector(".form__input_info_about");
@@ -26,5 +26,5 @@ function formSave(evt) {
 
 }
 profileEditButton.addEventListener("click", showEditForm);
-formCloseButton.addEventListener("click", closePopup);
+popupCloseButton.addEventListener("click", closePopup);
 popupForm.addEventListener("submit", formSave);
