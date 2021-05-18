@@ -6,7 +6,7 @@
     margin-top: 1px;
     position: absolute;
     top: -40px;
-    left: 430px;
+    right: -40px;
 }
 
 .form__close-button:hover {

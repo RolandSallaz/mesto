@@ -1,9 +1,9 @@
 const popup = document.querySelector('.popup');
-const popupSaveButton = document.querySelector(".popup__save-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const formCloseButton = document.querySelector(".form__close-button");
-const formName = document.querySelector(".form__input_name");
-const formAbout = document.querySelector(".form__input_about");
+const popupForm = document.querySelector(".form");
+const formName = document.querySelector(".form__input_info_name");
+const formAbout = document.querySelector(".form__input_info_about");
 const profileName = document.querySelector(".profile__name");
 const profileSubtitle = document.querySelector(".profile__subtitle");
 
@@ -18,8 +18,8 @@ function showEditForm() {
     formAbout.value = profileSubtitle.textContent;
 }
 
-function formSave() {
-
+function formSave(evt) {
+    evt.preventDefault();
     closePopup();
     profileName.textContent = formName.value;
     profileSubtitle.textContent = formAbout.value;
@@ -27,4 +27,4 @@ function formSave() {
 }
 profileEditButton.addEventListener("click", showEditForm);
 formCloseButton.addEventListener("click", closePopup);
-popupSaveButton.addEventListener("click", formSave);
+popupForm.addEventListener("submit", formSave);
