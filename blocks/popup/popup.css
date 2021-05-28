@@ -10,4 +10,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 1;
+    transition: visibility 0.3s ,opacity 0.3s linear;
+    visibility:visible;
+
 }
+
+
+
