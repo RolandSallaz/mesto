@@ -28,68 +28,58 @@
                 <button class="profile__add-button" aria-label="Добавить карточку" type="button"></button>
             </section>
             <section class="elements">
-                <div class="element">
-                    <img src="./images/element__image-karachevsk.jpg" alt="очень старая заброшенная церковь на фоне леса" class="element__image">
-                    <div class="element__container">
-                        <h2 class="element__heading">Карачаевск</h2>
-                        <button class="element__like" aria-label="Поставить лайк карточке" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/element__image-mounainElbrus.jpg" alt="гора эльбрус с закатом" class="element__image">
-                    <div class="element__container">
-                        <h2 class="element__heading">Гора эльбрус</h2>
-                        <button class="element__like" aria-label="Поставить лайк карточке" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/element__image-dombai.jpg" alt="Гора домбай и лес" class="element__image">
-                    <div class="element__container">
-                        <h2 class="element__heading">Домбай</h2>
-                        <button class="element__like" aria-label="Поставить лайк карточке" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/element__image-observatory.jpg" alt="Обсерватория на фоне звездного неба" class="element__image">
-                    <div class="element__container">
-                        <h2 class="element__heading">Обсерватория NOAO США</h2>
-                        <button class="element__like" aria-label="Поставить лайк карточке" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/element__image-lakeTahoe.jpg" alt="Озеро Тахо" class="element__image">
-                    <div class="element__container">
-                        <h2 class="element__heading">Озеро Тахо</h2>
-                        <button class="element__like" aria-label="Поставить лайк карточке" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img src="./images/element__image-forestTahoe.jpg" alt="Лес вокруг озера Тахо" class="element__image">
-                    <div class="element__container">
-                        <h2 class="element__heading">Леса озера Тахо</h2>
-                        <button class="element__like" aria-label="Поставить лайк карточке" type="button"></button>
-                    </div>
-                </div>
 
             </section>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
         </footer>
-        <div class="popup popup_hide">
+        <div class="popup popup_name_edit popup_hide">
             <div class="popup__container">
                 <button class="popup__close-button" aria-label="Закрыть форму" type="button"></button>
-                <form class="form" name="form">
+                <form class="form" id="edit">
                     <div class="form__container">
                         <h2 class="form__title">Редактировать профиль</h2>
-                        <input placeholder="Имя" type="text" class="form__input form__input_info_name" name="form__input-name" value="Жак-Ив Кусто" required>
-                        <input placeholder="О себе" type="text" class="form__input form__input_info_about" name="form__input-subtitle" value="Исследователь океана" required>
+                        <input placeholder="Имя" type="text" class="form__input form__input_info_name" id="form__input_info_name" value="Жак-Ив Кусто" required>
+                        <input placeholder="О себе" type="text" class="form__input form__input_info_about" id="form__input_info_about" value="Исследователь океана" required>
                         <button class="form__save-button" type="submit">Сохранить</button>
                     </div>
                 </form>
             </div>
         </div>
+        <div class="popup popup_name_add popup_hide">
+            <div class="popup__container">
+                <button class="popup__close-button" aria-label="Закрыть форму" type="button"></button>
+                <form class="form" id="add">
+                    <div class="form__container">
+                        <h2 class="form__title">Новое Место</h2>
+                        <input placeholder="Название" type="text" class="form__input form__input_info_name" id="form__input_info_cardName" required>
+                        <input placeholder="Ссылка на картинку" type="text" class="form__input form__input_info_about" id="form__input_info_link" required>
+                        <button class="form__save-button" type="submit">Создать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="popup popup_name_image popup_hide">
+            <div class="popup__container popup__container_name_preview">
+                <button class="popup__close-button" aria-label="Закрыть форму" type="button"></button>
+                <img src="" alt="Изображение недоступно" class="popup__image">
+                <p class="popup__image-name"></p>
+            </div> 
+            
+            </div>
+        </div>
     </div>
+    <template id=card>
+        <div class="element">
+            <button class="element__deleteButton"></button>
+            <img src="./images/element__image-karachevsk.jpg" alt="Карточка с местом и подписью" class="element__image">
+            <div class="element__container">
+                <h2 class="element__heading"></h2>
+                <button class="element__like" aria-label="Поставить лайк карточке" type="button"></button>
+            </div>
+        </div>
+    </template>
     <script src="./scripts/main.js"></script>
 </body>
 
