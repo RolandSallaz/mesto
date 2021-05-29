@@ -1,6 +1,8 @@
 const popupEdit = document.querySelector('.popup_name_edit'); // выбрал попап который редактирует профиль
 const popupAdd = document.querySelector('.popup_name_add'); // выбрал попап который добавляет карточку
 const popupPreview = document.querySelector('.popup_name_image'); // выбрал попап с просмотром картинки
+const popupPreviewImageName = popupPreview.querySelector('.popup__image-name');
+const popupPreviewImage = popupPreview.querySelector('.popup__image');
 const profileAddButton = document.querySelector('.profile__add-button'); // кнопка с добавлением карточек
 const profileEditButton = document.querySelector(".profile__edit-button"); // кнопка которая редактирует профиль
 const popupCloseButton = document.querySelectorAll(".popup__close-button"); // выбрал все кнопки закрывающие попапы;
@@ -14,6 +16,9 @@ const profileName = document.querySelector(".profile__name"); // перемен�
 const profileSubtitle = document.querySelector(".profile__subtitle"); // переменная с "о себе" в профиле
 const elements = document.querySelector(".elements"); // выбрал секцию
 const templateCard = document.querySelector("#card").content; // выбрал шаблон с карточкой
+const elementCard = templateCard.cloneNode(true);
+const elementCardHeading = templateCard.querySelector('.element__heading');
+const elementCardImage = templateCard.querySelector('.element__image');
 
 
 const popupCloseButtonsEvent = popupCloseButton.forEach((item) => { // каждой кнопке  закрытия попапа добавил событие
@@ -29,16 +34,6 @@ function closePopup(evt) { // закрытие попапа
 
 function showPopup(item) {
     document.querySelector(item).classList.remove('popup_hide');
-    console.log(document.querySelector(item));
-    if (item === '.popup_name_add') {
-        formCardName.value = "";
-        formLink.value = "";
-    } else if (item === '.popup_name_edit') {
-        formName.value = profileName.textContent;
-        formAbout.value = profileSubtitle.textContent;
-    }
-
-
 }
 
 function deleteCard(evt) { // удалить карточку
@@ -49,15 +44,15 @@ function saveCard(evt) { // отправка попапа с карточкам�
     evt.preventDefault();
     closePopup(evt);
     addCard(formCardName.value, formLink.value);
-    formCardName.value = "";
-    formLink.value = "";
+
 }
 
+
 function addCard(name, link) { // добавить карточку
+    elementCardHeading.innerText = name;
+    elementCardImage.setAttribute('src', link);
+    elementCardImage.setAttribute('alt', 'Добавленная пользователем карточка');
     const elementCard = templateCard.cloneNode(true);
-    elementCard.querySelector('.element__heading').innerText = name;
-    elementCard.querySelector('.element__image').setAttribute('src', link);
-    elementCard.querySelector('.element__image').setAttribute('alt', 'Добавленная пользователем карточка');
     setEventListeners(elementCard);
     elements.prepend(elementCard);
 }
@@ -66,9 +61,9 @@ function openPopupImageView(evt) { // попап с картинкой
     const elementText = evt.target.closest('.element').querySelector('.element__heading').textContent;
     const elementSrc = evt.target.closest('.element').querySelector('.element__image').getAttribute('src');
     popupPreview.classList.remove('popup_hide');
-    popupPreview.querySelector('.popup__image-name').innerText = elementText;
-    popupPreview.querySelector('.popup__image').setAttribute('src', elementSrc);
-    popupPreview.querySelector('.popup__image').setAttribute('alt', 'Картинка в режиме просмотра');
+    popupPreviewImageName.innerText = elementText;
+    popupPreviewImage.setAttribute('src', elementSrc);
+    popupPreviewImage.setAttribute('alt', 'Картинка в режиме просмотра');
 }
 
 function submitEditProfileForm(evt) { // сохранить форму профиля
@@ -89,7 +84,16 @@ function setEventListeners(element) { // добавить ивенты кноп�
     element.querySelector('.element__image').addEventListener('click', openPopupImageView);
 }
 
-profileAddButton.addEventListener("click", () => showPopup('.popup_name_add'));
-profileEditButton.addEventListener("click", () => showPopup('.popup_name_edit'));
+profileAddButton.addEventListener("click", () => {
+    formCardName.value = "";
+    formLink.value = "";
+    showPopup('.popup_name_add');
+});
+profileEditButton.addEventListener("click", () => {
+    formName.value = profileName.textContent;
+    formAbout.value = profileSubtitle.textContent;
+    showPopup('.popup_name_edit');
+});
+
 editForm.addEventListener("submit", submitEditProfileForm);
 addForm.addEventListener("submit", saveCard);

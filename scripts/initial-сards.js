@@ -25,10 +25,10 @@ const initialCards = [{
 ];
 
 function createCard(name, link) {
+    elementCardHeading.innerText = name;
+    elementCardImage.setAttribute('src', link);
+    elementCardImage.setAttribute('alt', 'Карточка по умолчанию');
     const elementCard = templateCard.cloneNode(true);
-    elementCard.querySelector('.element__heading').innerText = name;
-    elementCard.querySelector('.element__image').setAttribute('src', link);
-    elementCard.querySelector('.element__image').setAttribute('alt', 'Карточка по умолчанию');
     setEventListeners(elementCard);
     elements.prepend(elementCard);
 }
