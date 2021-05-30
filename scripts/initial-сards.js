@@ -24,14 +24,7 @@ const initialCards = [{
     }
 ];
 
-function createCard(name, link) {
-    elementCardHeading.innerText = name;
-    elementCardImage.setAttribute('src', link);
-    elementCardImage.setAttribute('alt', 'Карточка по умолчанию');
-    const elementCard = templateCard.cloneNode(true);
-    setEventListeners(elementCard);
-    elements.prepend(elementCard);
-}
+
 initialCards.forEach((item) => { // загрузить стартовые карточки из списка
     createCard(item.name, item.link);
 })

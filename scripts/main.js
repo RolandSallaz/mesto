@@ -33,7 +33,7 @@ function closePopup(evt) { // закрытие попапа
 
 
 function showPopup(item) {
-    document.querySelector(item).classList.remove('popup_hide');
+    item.classList.remove('popup_hide');
 }
 
 function deleteCard(evt) { // удалить карточку
@@ -43,19 +43,25 @@ function deleteCard(evt) { // удалить карточку
 function saveCard(evt) { // отправка попапа с карточками
     evt.preventDefault();
     closePopup(evt);
-    addCard(formCardName.value, formLink.value);
+    createCard(formCardName.value, formLink.value);
 
 }
 
-
-function addCard(name, link) { // добавить карточку
+function createCard(name, link) {
     elementCardHeading.innerText = name;
     elementCardImage.setAttribute('src', link);
     elementCardImage.setAttribute('alt', 'Добавленная пользователем карточка');
     const elementCard = templateCard.cloneNode(true);
-    setEventListeners(elementCard);
-    elements.prepend(elementCard);
+    addCard(elementCard);
 }
+
+function addCard(card) { // добавить карточку
+
+    setEventListeners(card);
+    elements.prepend(card);
+}
+
+
 
 function openPopupImageView(evt) { // попап с картинкой
     const elementText = evt.target.closest('.element').querySelector('.element__heading').textContent;
@@ -87,12 +93,12 @@ function setEventListeners(element) { // добавить ивенты кноп�
 profileAddButton.addEventListener("click", () => {
     formCardName.value = "";
     formLink.value = "";
-    showPopup('.popup_name_add');
+    showPopup(popupAdd);
 });
 profileEditButton.addEventListener("click", () => {
     formName.value = profileName.textContent;
     formAbout.value = profileSubtitle.textContent;
-    showPopup('.popup_name_edit');
+    showPopup(popupEdit);
 });
 
 editForm.addEventListener("submit", submitEditProfileForm);
