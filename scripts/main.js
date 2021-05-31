@@ -43,7 +43,7 @@ function deleteCard(evt) { // удалить карточку
 function saveCard(evt) { // отправка попапа с карточками
     evt.preventDefault();
     closePopup(evt);
-    createCard(formCardName.value, formLink.value);
+    addCard(formCardName.value, formLink.value);
 
 }
 
@@ -52,12 +52,12 @@ function createCard(name, link) {
     elementCardImage.setAttribute('src', link);
     elementCardImage.setAttribute('alt', 'Добавленная пользователем карточка');
     const elementCard = templateCard.cloneNode(true);
-    addCard(elementCard);
+    setEventListeners(elementCard);
+    return elementCard;
 }
 
-function addCard(card) { // добавить карточку
-
-    setEventListeners(card);
+function addCard(name, link) { // добавить карточку
+    const card = createCard(name, link);
     elements.prepend(card);
 }
 
