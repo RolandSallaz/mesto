@@ -32,12 +32,14 @@ function closePopup(evt) { // закрытие попапа
     evt.target.closest('.popup').classList.add('popup_hide');
 
 
+
 }
 
 
 function showPopup(item) {
     item.classList.remove('popup_hide');
     document.addEventListener('keydown', closePopupByKey);
+
 
 
 

@@ -11,7 +11,6 @@ function enableValidation(object) {
     });
 }
 
-
 function setFormListeners(formElement, object) {
     const inputList = Array.from(formElement.querySelectorAll(`.${object.inputSelector}`));
     inputList.forEach((input) => {
@@ -22,6 +21,7 @@ function setFormListeners(formElement, object) {
     });
 
 }
+
 
 function formValidation(form, input, object) {
     if (input.validity.valid) {
@@ -53,11 +53,12 @@ function isValid(form, object) {
         formButton.setAttribute('disabled', true);
     }
 }
-enableValidation({
+const validation = ({
     formSelector: 'form',
     inputSelector: 'form__input',
     submitButtonSelector: 'form__save-button',
     inactiveButtonClass: 'form__save-button-disabled',
-    inputErrorClass: 'popup__input_type_error',
+    inputErrorClass: 'popup__error',
     errorClass: 'form__error_show'
 });
+enableValidation(validation);
