@@ -2,7 +2,7 @@
     margin: 0;
     border-radius: 3%;
     position: relative;
-    background-color:rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 1);
     width: 430px;
     display: flex;
     flex-direction: column;
@@ -12,4 +12,8 @@
     .popup__container {
         width: 282px;
     }
+}
+
+.popup__container:hover {
+    cursor: auto;
 }

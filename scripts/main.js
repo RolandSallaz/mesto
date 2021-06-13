@@ -19,6 +19,7 @@ const templateCard = document.querySelector("#card").content; // выбрал ш
 const elementCard = templateCard.cloneNode(true);
 const elementCardHeading = templateCard.querySelector('.element__heading');
 const elementCardImage = templateCard.querySelector('.element__image');
+const popupsList = Array.from(document.querySelectorAll('.popup'));
 
 
 const popupCloseButtonsEvent = popupCloseButton.forEach((item) => { // каждой кнопке  закрытия попапа добавил событие
@@ -90,6 +91,8 @@ function setEventListeners(element) { // добавить ивенты кноп�
     element.querySelector('.element__image').addEventListener('click', openPopupImageView);
 }
 
+
+
 profileAddButton.addEventListener("click", () => {
     formCardName.value = "";
     formLink.value = "";
@@ -100,6 +103,12 @@ profileEditButton.addEventListener("click", () => {
     formAbout.value = profileSubtitle.textContent;
     showPopup(popupEdit);
 });
-
+popupsList.forEach((popups) => { // добавил на каждый попап закрытие по оверлею
+    popups.addEventListener('click', function(evt) {
+        if (evt.target.classList.contains('popup')) {
+            closePopup(evt);
+        }
+    });
+});
 editForm.addEventListener("submit", submitEditProfileForm);
 addForm.addEventListener("submit", saveCard);

@@ -37,11 +37,17 @@
         <div class="popup popup_name_edit popup_hide">
             <div class="popup__container">
                 <button class="popup__close-button" aria-label="Закрыть форму" type="button"></button>
-                <form class="form" id="edit">
+                <form class="form" id="edit" novalidate>
                     <div class="form__container">
                         <h2 class="form__title">Редактировать профиль</h2>
-                        <input placeholder="Имя" type="text" class="form__input form__input_info_name" id="form__input_info_name" value="Жак-Ив Кусто" required>
-                        <input placeholder="О себе" type="text" class="form__input form__input_info_about" id="form__input_info_about" value="Исследователь океана" required>
+                        <label>
+                        <input placeholder="Имя" type="text" class="form__input form__input_info_name" id="form__input_info_name" value="Жак-Ив Кусто" required minlength="2" maxlength="40">
+                        <span class="form__input_info_name-error form__error">Поле с ошибкой</span>
+                    </label>
+                        <label>
+                        <input placeholder="О себе" type="text" class="form__input form__input_info_about" id="form__input_info_about" value="Исследователь океана" required minlength="2" maxlength="200">
+                        <span class="form__input_info_about-error form__error">Поле с ошибкой</span>
+                    </label>
                         <button class="form__save-button" type="submit">Сохранить</button>
                     </div>
                 </form>
@@ -50,11 +56,17 @@
         <div class="popup popup_name_add popup_hide">
             <div class="popup__container">
                 <button class="popup__close-button" aria-label="Закрыть форму" type="button"></button>
-                <form class="form" id="add">
+                <form class="form" id="add" novalidate>
                     <div class="form__container">
                         <h2 class="form__title">Новое Место</h2>
-                        <input placeholder="Название" type="text" class="form__input form__input_info_name" id="form__input_info_cardName" required>
-                        <input placeholder="Ссылка на картинку" type="text" class="form__input form__input_info_about" id="form__input_info_link" required>
+                        <label>
+                            <input placeholder="Название" type="text" class="form__input form__input_info_name" id="form__input_info_cardName" required>
+                            <span class="form__input_info_cardName-error form__error">Поле с ошибкой</span>
+                        </label>
+                        <label>
+                        <input placeholder="Ссылка на картинку" type="url" class="form__input form__input_info_about" id="form__input_info_link" required>
+                        <span class="form__input_info_link-error form__error">Поле с ошибкой</span>
+                    </label>
                         <button class="form__save-button" type="submit">Создать</button>
                     </div>
                 </form>
@@ -81,6 +93,7 @@
     </template>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/initial-сards.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
