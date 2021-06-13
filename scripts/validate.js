@@ -25,21 +25,21 @@ function setFormListeners(formElement, object) {
 
 function formValidation(form, input, object) {
     if (input.validity.valid) {
-        hideError(form, input, object.errorClass);
+        hideError(form, input, object);
     } else {
-        showError(form, input, input.validationMessage, object.errorClass);
+        showError(form, input, input.validationMessage, object);
     }
 }
 
-function showError(form, input, errorMessage, errorClass) {
-    const errorElement = form.querySelector(`.${input.id}-error`);
+function showError(form, input, errorMessage, object) {
+    const errorElement = form.querySelector(`#${input.id}-error`);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(errorClass);
+    errorElement.classList.add(object.errorClass);
 }
 
-function hideError(form, input, errorClass) {
-    const errorElement = form.querySelector(`.${input.id}-error`);
-    errorElement.classList.remove(errorClass);
+function hideError(form, input, object) {
+    const errorElement = form.querySelector(`#${input.id}-error`);
+    errorElement.classList.remove(object.errorClass);
 }
 
 function isValid(form, object) {
@@ -58,5 +58,6 @@ enableValidation({
     inputSelector: 'form__input',
     submitButtonSelector: 'form__save-button',
     inactiveButtonClass: 'form__save-button-disabled',
+    inputErrorClass: 'popup__input_type_error',
     errorClass: 'form__error_show'
 });

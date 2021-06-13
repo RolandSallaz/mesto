@@ -39,6 +39,8 @@ function showPopup(item) {
     item.classList.remove('popup_hide');
     document.addEventListener('keydown', closePopupByKey);
 
+
+
 }
 
 function closePopupByKey(evt) { // закрытие по нажатию на ESC
