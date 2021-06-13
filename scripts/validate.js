@@ -1,5 +1,5 @@
 function enableValidation(object) {
-    const forms = Array.from(document.querySelectorAll(object.formSelector));
+    const forms = Array.from(document.querySelectorAll(`.${object.formSelector}`));
 
     forms.forEach((formElement) => {
 
@@ -13,7 +13,7 @@ function enableValidation(object) {
 
 
 function setFormListeners(formElement, object) {
-    const inputList = Array.from(formElement.querySelectorAll(object.inputSelector));
+    const inputList = Array.from(formElement.querySelectorAll(`.${object.inputSelector}`));
     inputList.forEach((input) => {
         input.addEventListener('input', function() {
             formValidation(formElement, input, object);
@@ -43,7 +43,7 @@ function hideError(form, input, errorClass) {
 }
 
 function isValid(form, object) {
-    const formButton = form.querySelector(object.submitButtonSelector);
+    const formButton = form.querySelector(`.${object.submitButtonSelector}`);
     if (form.checkValidity()) {
         formButton.removeAttribute('disabled');
         formButton.classList.remove(object.inactiveButtonClass);
@@ -54,9 +54,9 @@ function isValid(form, object) {
     }
 }
 enableValidation({
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__save-button',
-    inactiveButtonClass: 'form__save-button_disabled',
+    formSelector: 'form',
+    inputSelector: 'form__input',
+    submitButtonSelector: 'form__save-button',
+    inactiveButtonClass: 'form__save-button-disabled',
     errorClass: 'form__error_show'
 });
