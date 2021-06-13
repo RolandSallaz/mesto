@@ -30,11 +30,26 @@ const popupCloseButtonsEvent = popupCloseButton.forEach((item) => { // кажд�
 
 function closePopup(evt) { // закрытие попапа
     evt.target.closest('.popup').classList.add('popup_hide');
+
+
 }
 
 
 function showPopup(item) {
     item.classList.remove('popup_hide');
+    document.addEventListener('keydown', closePopupByKey);
+
+}
+
+function closePopupByKey(evt) { // закрытие по нажатию на ESC
+    if (evt.key === 'Escape') {
+        document.removeEventListener('keydown', closePopupByKey);
+        popupsList.forEach((popup) => {
+            if (!popup.classList.contains("popup_hide")) {
+                popup.classList.add('popup_hide');
+            }
+        });
+    }
 }
 
 function deleteCard(evt) { // удалить карточку
@@ -71,6 +86,7 @@ function openPopupImageView(evt) { // попап с картинкой
     popupPreviewImageName.innerText = elementText;
     popupPreviewImage.setAttribute('src', elementSrc);
     popupPreviewImage.setAttribute('alt', 'Картинка в режиме просмотра');
+    document.addEventListener('keydown', closePopupByKey);
 }
 
 function submitEditProfileForm(evt) { // сохранить форму профиля
@@ -93,6 +109,9 @@ function setEventListeners(element) { // добавить ивенты кноп�
 
 
 
+
+
+
 profileAddButton.addEventListener("click", () => {
     formCardName.value = "";
     formLink.value = "";
@@ -109,6 +128,7 @@ popupsList.forEach((popups) => { // добавил на каждый попап 
             closePopup(evt);
         }
     });
+
 });
 editForm.addEventListener("submit", submitEditProfileForm);
 addForm.addEventListener("submit", saveCard);
