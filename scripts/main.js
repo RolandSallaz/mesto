@@ -19,40 +19,28 @@ const templateCard = document.querySelector("#card").content; // выбрал ш
 const elementCard = templateCard.cloneNode(true);
 const elementCardHeading = templateCard.querySelector('.element__heading');
 const elementCardImage = templateCard.querySelector('.element__image');
-const popupsList = Array.from(document.querySelectorAll('.popup'));
-
-
+const popupsList = document.querySelectorAll('.popup');
 const popupCloseButtonsEvent = popupCloseButton.forEach((item) => { // каждой кнопке  закрытия попапа добавил событие
-    item.addEventListener('click', closePopup);
+    item.addEventListener('click', (evt) => {
+        closePopup(evt.target);
+    });
 })
 
-
-
 function closePopup(evt) { // закрытие попапа
-    evt.target.closest('.popup').classList.add('popup_hide');
-
-
-
+    evt.closest(".popup").classList.remove('popup_show');
+    document.removeEventListener('keydown', closePopupByKey);
 }
 
-
 function showPopup(item) {
-    item.classList.remove('popup_hide');
+    item.classList.add('popup_show');
     document.addEventListener('keydown', closePopupByKey);
-
-
-
-
+    enableValidation(validationConfig);
 }
 
 function closePopupByKey(evt) { // закрытие по нажатию на ESC
+    const activePopup = document.querySelector('.popup_show');
     if (evt.key === 'Escape') {
-        document.removeEventListener('keydown', closePopupByKey);
-        popupsList.forEach((popup) => {
-            if (!popup.classList.contains("popup_hide")) {
-                popup.classList.add('popup_hide');
-            }
-        });
+        closePopup(activePopup);
     }
 }
 
@@ -62,9 +50,8 @@ function deleteCard(evt) { // удалить карточку
 
 function saveCard(evt) { // отправка попапа с карточками
     evt.preventDefault();
-    closePopup(evt);
+    closePopup(evt.target);
     addCard(formCardName.value, formLink.value);
-
 }
 
 function createCard(name, link) {
@@ -81,24 +68,20 @@ function addCard(name, link) { // добавить карточку
     elements.prepend(card);
 }
 
-
-
 function openPopupImageView(evt) { // попап с картинкой
     const elementText = evt.target.closest('.element').querySelector('.element__heading').textContent;
     const elementSrc = evt.target.closest('.element').querySelector('.element__image').getAttribute('src');
-    popupPreview.classList.remove('popup_hide');
+    showPopup(popupPreview);
     popupPreviewImageName.innerText = elementText;
     popupPreviewImage.setAttribute('src', elementSrc);
     popupPreviewImage.setAttribute('alt', 'Картинка в режиме просмотра');
-    document.addEventListener('keydown', closePopupByKey);
 }
 
 function submitEditProfileForm(evt) { // сохранить форму профиля
     evt.preventDefault();
-    closePopup(evt);
+    closePopup(evt.target);
     profileName.textContent = formName.value;
     profileSubtitle.textContent = formAbout.value;
-
 }
 
 function setLike(evt) { // поставить лайк
@@ -110,12 +93,6 @@ function setEventListeners(element) { // добавить ивенты кноп�
     element.querySelector('.element__like').addEventListener('click', setLike);
     element.querySelector('.element__image').addEventListener('click', openPopupImageView);
 }
-
-
-
-
-
-
 profileAddButton.addEventListener("click", () => {
     formCardName.value = "";
     formLink.value = "";
@@ -129,7 +106,7 @@ profileEditButton.addEventListener("click", () => {
 popupsList.forEach((popups) => { // добавил на каждый попап закрытие по оверлею
     popups.addEventListener('click', function(evt) {
         if (evt.target.classList.contains('popup')) {
-            closePopup(evt);
+            closePopup(evt.target);
         }
     });
 
