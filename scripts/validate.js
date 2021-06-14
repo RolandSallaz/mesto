@@ -53,7 +53,7 @@ function isValid(form, object) {
         formButton.setAttribute('disabled', true);
     }
 }
-const validation = ({
+enableValidation({
     formSelector: 'form',
     inputSelector: 'form__input',
     submitButtonSelector: 'form__save-button',
@@ -61,4 +61,3 @@ const validation = ({
     inputErrorClass: 'popup__error',
     errorClass: 'form__error_show'
 });
-enableValidation(validation);
