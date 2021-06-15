@@ -34,7 +34,7 @@ function closePopup(evt) { // закрытие попапа
 function showPopup(item) {
     item.classList.add('popup_show');
     document.addEventListener('keydown', closePopupByKey);
-    enableValidation(validationConfig);
+    checkValid(item);
 }
 
 function closePopupByKey(evt) { // закрытие по нажатию на ESC

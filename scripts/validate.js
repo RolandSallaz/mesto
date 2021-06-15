@@ -7,12 +7,9 @@ const validationConfig = ({
     errorClass: 'form__error_show'
 });
 
-
 function enableValidation(object) {
     const forms = Array.from(document.querySelectorAll(`.${object.formSelector}`));
-
     forms.forEach((formElement) => {
-
         formElement.addEventListener('submit', function(evt) {
             evt.preventDefault();
         });
@@ -24,7 +21,6 @@ function enableValidation(object) {
 function setFormListeners(formElement, object) {
     const inputList = Array.from(formElement.querySelectorAll(`.${object.inputSelector}`));
     inputList.forEach((input) => {
-        formValidation(formElement, input, object);
         input.addEventListener('input', function() {
             formValidation(formElement, input, object);
             isValid(formElement, object);
@@ -33,6 +29,15 @@ function setFormListeners(formElement, object) {
 
 }
 
+
+function checkValid(form) {
+    const currentForm = form.querySelector('.form');
+    const InputList = Array.from(form.querySelectorAll('.form__input'));
+    InputList.forEach((input) => {
+        hideError(currentForm, input, validationConfig);
+        isValid(currentForm, validationConfig);
+    });
+}
 
 function formValidation(form, input, object) {
     if (input.validity.valid) {
