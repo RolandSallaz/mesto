@@ -34,7 +34,6 @@ function closePopup(evt) { // закрытие попапа
 function showPopup(item) {
     item.classList.add('popup_show');
     document.addEventListener('keydown', closePopupByKey);
-    checkValid(item);
 }
 
 function closePopupByKey(evt) { // закрытие по нажатию на ESC
@@ -93,15 +92,17 @@ function setEventListeners(element) { // добавить ивенты кноп�
     element.querySelector('.element__like').addEventListener('click', setLike);
     element.querySelector('.element__image').addEventListener('click', openPopupImageView);
 }
-profileAddButton.addEventListener("click", () => {
+profileAddButton.addEventListener("click", (evt) => {
     formCardName.value = "";
     formLink.value = "";
     showPopup(popupAdd);
+    checkValid(popupAdd);
 });
 profileEditButton.addEventListener("click", () => {
     formName.value = profileName.textContent;
     formAbout.value = profileSubtitle.textContent;
     showPopup(popupEdit);
+    checkValid(popupEdit);
 });
 popupsList.forEach((popups) => { // добавил на каждый попап закрытие по оверлею
     popups.addEventListener('click', function(evt) {

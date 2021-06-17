@@ -32,8 +32,8 @@ function setFormListeners(formElement, object) {
 
 function checkValid(form) {
     const currentForm = form.querySelector('.form');
-    const InputList = Array.from(form.querySelectorAll('.form__input'));
-    InputList.forEach((input) => {
+    const inputList = Array.from(form.querySelectorAll('.form__input'));
+    inputList.forEach((input) => {
         hideError(currentForm, input, validationConfig);
         isValid(currentForm, validationConfig);
     });
