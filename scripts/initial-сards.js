@@ -24,7 +24,9 @@ const initialCards = [{
     }
 ];
 
-
-initialCards.forEach((item) => { // загрузить стартовые карточки из списка
-    addCard(item.name, item.link);
-})
+function generateCards(object) {
+    initialCards.forEach((item) => { // загрузить стартовые карточки из списка
+        const newCard = new object(item.name, item.link);
+        newCard.addCard();
+    })
+}
