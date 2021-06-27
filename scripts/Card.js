@@ -7,9 +7,6 @@ export class Card {
         this._elementCardHeading = this._templateCard.querySelector('.element__heading');
         this._elementCardImage = this._templateCard.querySelector('.element__image');
         this._elements = document.querySelector(".elements"); // выбрал секцию
-        this._popupPreview = document.querySelector('.popup_name_image'); // выбрал попап с просмотром картинки
-        this._popupPreviewImageName = this._popupPreview.querySelector('.popup__image-name');
-        this._popupPreviewImage = this._popupPreview.querySelector('.popup__image');
     }
     _createCard = () => {
         this._elementCardHeading.innerText = this._name;
@@ -37,9 +34,13 @@ export class Card {
     _cardPopup(_evt) {
         const _elementText = _evt.target.closest('.element').querySelector('.element__heading').textContent;
         const _elementSrc = _evt.target.closest('.element').querySelector('.element__image').getAttribute('src');
-        showPopup(this._popupPreview);
-        this._popupPreviewImageName.innerText = _elementText;
-        this._popupPreviewImage.setAttribute('src', _elementSrc);
-        this._popupPreviewImage.setAttribute('alt', 'Картинка в режиме просмотра');
+        const _popupPreview = document.querySelector('.popup_name_image'); // выбрал попап с просмотром картинки
+        const _popupPreviewImageName = _popupPreview.querySelector('.popup__image-name');
+        const _popupPreviewImage = _popupPreview.querySelector('.popup__image');
+        showPopup(_popupPreview);
+        _popupPreviewImageName.innerText = _elementText;
+        _popupPreviewImage.setAttribute('src', _elementSrc);
+        _popupPreviewImage.setAttribute('alt', 'Картинка в режиме просмотра');
     }
 }
+import { showPopup } from './index.js';

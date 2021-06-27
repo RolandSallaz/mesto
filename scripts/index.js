@@ -25,7 +25,7 @@ function closePopup(evt) { // закрытие попапа
     document.removeEventListener('keydown', closePopupByKey);
 }
 
-function showPopup(item) {
+export function showPopup(item) {
     item.classList.add('popup_show');
     document.addEventListener('keydown', closePopupByKey);
 }
