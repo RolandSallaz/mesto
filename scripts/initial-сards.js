@@ -24,9 +24,13 @@ const initialCards = [{
     }
 ];
 
-function generateCards(object) {
+function generateCards(classObject) {
     initialCards.forEach((item) => { // загрузить стартовые карточки из списка
-        const newCard = new object(item.name, item.link);
+        const cardObject = {
+            name: item.name,
+            link: item.link,
+        }
+        const newCard = new classObject(cardObject);
         newCard.addCard();
     })
 }

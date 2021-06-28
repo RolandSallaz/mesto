@@ -14,19 +14,19 @@ const formLink = document.querySelector('#form__input_info_link');
 const profileName = document.querySelector(".profile__name"); // переменная с именем в профиле
 const profileSubtitle = document.querySelector(".profile__subtitle"); // переменная с "о себе" в профиле
 const popupsList = document.querySelectorAll('.popup');
-const popupCloseButtonsEvent = popupCloseButton.forEach((item) => { // каждой кнопке  закрытия попапа добавил событие
+popupCloseButton.forEach((item) => { // каждой кнопке  закрытия попапа добавил событие
     item.addEventListener('click', (evt) => {
         closePopup(evt.target);
     });
 })
 
-function closePopup(evt) { // закрытие попапа
-    evt.closest(".popup").classList.remove('popup_show');
+function closePopup(popup) { // закрытие попапа
+    popup.closest(".popup").classList.remove('popup_show');
     document.removeEventListener('keydown', closePopupByKey);
 }
 
-export function showPopup(item) {
-    item.classList.add('popup_show');
+export function showPopup(popup) {
+    popup.classList.add('popup_show');
     document.addEventListener('keydown', closePopupByKey);
 }
 
@@ -40,7 +40,11 @@ function closePopupByKey(evt) { // закрытие по нажатию на ESC
 function saveCard(evt) { // отправка попапа с карточками
     evt.preventDefault();
     closePopup(evt.target);
-    const newCard = new Card(formCardName.value, formLink.value);
+    const cardObject = {
+        name: formCardName.value,
+        link: formLink.value
+    }
+    const newCard = new Card(cardObject);
     newCard.addCard();
 }
 
@@ -51,8 +55,7 @@ function submitEditProfileForm(evt) { // сохранить форму проф�
     profileSubtitle.textContent = formAbout.value;
 }
 profileAddButton.addEventListener("click", (evt) => {
-    formCardName.value = "";
-    formLink.value = "";
+    addForm.reset();
     showPopup(popupAdd);
     validator.checkValid(popupAdd);
 });
@@ -64,7 +67,7 @@ profileEditButton.addEventListener("click", () => {
 });
 popupsList.forEach((popups) => { // добавил на каждый попап закрытие по оверлею
     popups.addEventListener('click', function(evt) {
-        if (evt.target.classList.contains('popup')) {
+        if (evt.target.classList.contains('popup_show')) {
             closePopup(evt.target);
         }
     });
