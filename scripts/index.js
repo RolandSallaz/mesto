@@ -14,6 +14,7 @@ const formLink = document.querySelector('#form__input_info_link');
 const profileName = document.querySelector(".profile__name"); // переменная с именем в профиле
 const profileSubtitle = document.querySelector(".profile__subtitle"); // переменная с "о себе" в профиле
 const popupsList = document.querySelectorAll('.popup');
+export const cardContainer = document.querySelector(".elements"); // ceкция куда нужно добавить карточку
 popupCloseButton.forEach((item) => { // каждой кнопке  закрытия попапа добавил событие
     item.addEventListener('click', (evt) => {
         closePopup(evt.target);
@@ -42,10 +43,11 @@ function saveCard(evt) { // отправка попапа с карточкам�
     closePopup(evt.target);
     const cardObject = {
         name: formCardName.value,
-        link: formLink.value
+        link: formLink.value,
+        template: "#card"
     }
     const newCard = new Card(cardObject);
-    newCard.addCard();
+    cardContainer.prepend(newCard.createCard());
 }
 
 function submitEditProfileForm(evt) { // сохранить форму профиля
@@ -75,4 +77,3 @@ popupsList.forEach((popups) => { // добавил на каждый попап 
 });
 editForm.addEventListener("submit", submitEditProfileForm);
 addForm.addEventListener("submit", saveCard);
-generateCards(Card);

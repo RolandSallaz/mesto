@@ -1,48 +1,43 @@
 import { showPopup } from './index.js';
 export class Card {
-    constructor(template) {
-        this._name = template.name;
-        this._link = template.link;
-        this._elements = document.querySelector(".elements"); // выбрал секцию
+    constructor(data) {
+        this._name = data.name;
+        this._link = data.link;
+        this._cardSelector = data.template;
     }
     _getTemplate = () => {
         const cardElement = document
-            .querySelector("#card")
+            .querySelector(this._cardSelector)
             .content
             .cloneNode(true);
         return cardElement;
     }
-    _createCard = () => {
+    createCard = () => {
         const card = this._getTemplate();
         card.querySelector('.element__heading').textContent = this._name;
         card.querySelector('.element__image').setAttribute('src', this._link);
         card.querySelector('.element__image').setAttribute('alt', this._name);
-        this._elementCard = card.cloneNode(true);
-        this._setEventListeners(this._elementCard);
-        return this._elementCard;
+        this._setEventListeners(card);
+        return card;
     }
-    addCard = () => {
-        const card = this._createCard();
-        this._elements.prepend(card);
+    _setEventListeners = (element) => {
+        element.querySelector('.element__deleteButton').addEventListener('click', this._deleteCard);
+        element.querySelector('.element__like').addEventListener('click', this._toggleLike);
+        element.querySelector('.element__image').addEventListener('click', this._cardPopup);
     }
-    _setEventListeners = (_element) => {
-        _element.querySelector('.element__deleteButton').addEventListener('click', this._deleteCard);
-        _element.querySelector('.element__like').addEventListener('click', this._toggleLike);
-        _element.querySelector('.element__image').addEventListener('click', this._cardPopup);
+    _deleteCard = (evt) => {
+        evt.target.closest('.element').remove();
     }
-    _deleteCard = (_evt) => {
-        _evt.target.closest('.element').remove();
-    }
-    _toggleLike = (_evt) => {
-        _evt.target.classList.toggle('element__like_clicked');
+    _toggleLike = (evt) => {
+        evt.target.classList.toggle('element__like_clicked');
     }
     _cardPopup = () => {
-        const _popupPreview = document.querySelector('.popup_name_image'); // выбрал попап с просмотром картинки
-        const _popupPreviewImageName = _popupPreview.querySelector('.popup__image-name');
-        const _popupPreviewImage = _popupPreview.querySelector('.popup__image');
+        const popupPreview = document.querySelector('.popup_name_image'); // выбрал попап с просмотром картинки
+        const popupPreviewImageName = popupPreview.querySelector('.popup__image-name');
+        const popupPreviewImage = popupPreview.querySelector('.popup__image');
         showPopup(_popupPreview);
-        _popupPreviewImageName.innerText = this._name;
-        _popupPreviewImage.setAttribute('src', this._link);
-        _popupPreviewImage.setAttribute('alt', 'Картинка в режиме просмотра');
+        popupPreviewImageName.textContent = this._name;
+        popupPreviewImage.setAttribute('src', this._link);
+        popupPreviewImage.setAttribute('alt', 'Картинка в режиме просмотра');
     }
 }
