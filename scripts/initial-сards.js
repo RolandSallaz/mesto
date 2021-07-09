@@ -1,6 +1,4 @@
-import { cardContainer } from './index.js';
-import { Card } from './Card.js';
-const initialCards = [{
+export const initialCards = [{
         name: 'Домбай',
         link: './images/element__image-dombai.jpg'
     },
@@ -25,12 +23,3 @@ const initialCards = [{
         link: './images/element__image-observatory.jpg'
     }
 ];
-initialCards.forEach((item) => { // загрузить стартовые карточки из списка
-    const cardObject = {
-        name: item.name,
-        link: item.link,
-        template: "#card"
-    }
-    const newCard = new Card(cardObject);
-    cardContainer.prepend(newCard.createCard());
-})

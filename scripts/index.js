@@ -1,5 +1,8 @@
 import { validator } from './FormValidator.js';
 import { Card } from './Card.js';
+import { initialCards } from './initial-сards.js';
+import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
 const popupEdit = document.querySelector('.popup_name_edit'); // выбрал попап который редактирует профиль
 const popupAdd = document.querySelector('.popup_name_add'); // выбрал попап который добавляет карточку
 const profileAddButton = document.querySelector('.profile__add-button'); // кнопка с добавлением карточек
@@ -14,40 +17,22 @@ const formLink = document.querySelector('#form__input_info_link');
 const profileName = document.querySelector(".profile__name"); // переменная с именем в профиле
 const profileSubtitle = document.querySelector(".profile__subtitle"); // переменная с "о себе" в профиле
 const popupsList = document.querySelectorAll('.popup');
-export const cardContainer = document.querySelector(".elements"); // ceкция куда нужно добавить карточку
-popupCloseButton.forEach((item) => { // каждой кнопке  закрытия попапа добавил событие
-    item.addEventListener('click', (evt) => {
-        closePopup(evt.target);
-    });
-})
+const cardContainer = document.querySelector(".elements"); // ceкция куда нужно добавить карточку
+const defaultCardSelector = "#card"
+const popupPreview = document.querySelector('.popup_name_image'); // выбрал попап с просмотром картинки
 
-function closePopup(popup) { // закрытие попапа
-    popup.closest(".popup").classList.remove('popup_show');
-    document.removeEventListener('keydown', closePopupByKey);
-}
 
-export function showPopup(popup) {
-    popup.classList.add('popup_show');
-    document.addEventListener('keydown', closePopupByKey);
-}
-
-function closePopupByKey(evt) { // закрытие по нажатию на ESC
-    const activePopup = document.querySelector('.popup_show');
-    if (evt.key === 'Escape') {
-        closePopup(activePopup);
-    }
-}
 
 function saveCard(evt) { // отправка попапа с карточками
     evt.preventDefault();
     closePopup(evt.target);
     const cardObject = {
         name: formCardName.value,
-        link: formLink.value,
-        template: "#card"
+        link: formLink.value
     }
-    const newCard = new Card(cardObject);
-    cardContainer.prepend(newCard.createCard());
+    const card = new Card(cardObject, defaultCardSelector);
+    const generatedCard = card.createCard();
+    cardList.addItem(generatedCard);
 }
 
 function submitEditProfileForm(evt) { // сохранить форму профиля
@@ -77,3 +62,16 @@ popupsList.forEach((popups) => { // добавил на каждый попап 
 });
 editForm.addEventListener("submit", submitEditProfileForm);
 addForm.addEventListener("submit", saveCard);
+const popupWithImg = new PopupWithImage(popupPreview);
+const cardList = new Section({
+        items: initialCards,
+        renderer: (item) => {
+            const card = new Card(item, defaultCardSelector, popupWithImg);
+            const generatedCard = card.createCard();
+            cardList.addItem(generatedCard);
+
+        },
+    },
+    cardContainer
+)
+cardList.renderItem();
