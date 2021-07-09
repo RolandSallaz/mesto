@@ -1,8 +1,9 @@
 export default class Popup {
     constructor(selector) {
         this._selector = selector;
+        this.open = this.open.bind(this);
     }
-    open = () => {
+    open() {
         this._selector.classList.add('popup_show');
     }
     close = () => {
