@@ -23,7 +23,7 @@ export class Card {
     _setEventListeners = (element) => {
         element.querySelector('.element__deleteButton').addEventListener('click', this._deleteCard);
         element.querySelector('.element__like').addEventListener('click', this._toggleLike);
-        element.querySelector('.element__image').addEventListener('click', this._cardPopup);
+        element.querySelector('.element__image').addEventListener('click', this.handleCardClick);
     }
     _deleteCard = (evt) => {
         evt.target.closest('.element').remove();
@@ -31,7 +31,7 @@ export class Card {
     _toggleLike = (evt) => {
         evt.target.classList.toggle('element__like_clicked');
     }
-    _cardPopup = () => {
+    handleCardClick = () => {
         this._popupOpen(this._name, this._link);
     }
 }
