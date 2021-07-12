@@ -1,13 +1,6 @@
-class FormValidator {
-    constructor() {
-        this._object = {
-            formSelector: 'form',
-            inputSelector: 'form__input',
-            submitButtonSelector: 'form__save-button',
-            inactiveButtonClass: 'form__save-button-disabled',
-            inputErrorClass: 'popup__error',
-            errorClass: 'form__error_show'
-        };
+export default class FormValidator {
+    constructor(config) {
+        this._object = config;
     }
     enableValidation = () => {
         const _forms = Array.from(document.querySelectorAll(`.${this._object.formSelector}`));
@@ -16,7 +9,7 @@ class FormValidator {
                 evt.preventDefault();
             });
             this._setFormListeners(_formElement);
-            this._isValid(_formElement);
+            this._toggleButtonState(_formElement);
         });
     }
     _setFormListeners = (_formElement) => {
@@ -24,7 +17,7 @@ class FormValidator {
         _inputList.forEach((_input) => {
             _input.addEventListener('input', () => {
                 this._formValidation(_formElement, _input);
-                this._isValid(_formElement);
+                this._toggleButtonState(_formElement);
             });
         });
     }
@@ -35,7 +28,7 @@ class FormValidator {
             this._showError(_form, _input, _input.validationMessage);
         }
     }
-    _isValid = (_form) => {
+    _toggleButtonState = (_form) => {
         const _formButton = _form.querySelector(`.${this._object.submitButtonSelector}`);
         if (_form.checkValidity()) {
             _formButton.removeAttribute('disabled');
@@ -56,13 +49,11 @@ class FormValidator {
         _errorElement.classList.remove(this._object.errorClass);
     }
     checkValid = (_form) => {
-        const _currentForm = _form.querySelector('.form');
-        const _inputList = Array.from(_form.querySelectorAll('.form__input'));
+        const _currentForm = document.querySelector(_form).querySelector('.form');
+        const _inputList = Array.from(_currentForm.querySelectorAll('.form__input'));
         _inputList.forEach((_input) => {
             this._hideError(_currentForm, _input, this._object);
-            this._isValid(_currentForm, this._object);
+            this._toggleButtonState(_currentForm, this._object);
         });
     }
 }
-export const validator = new FormValidator();
-validator.enableValidation();
