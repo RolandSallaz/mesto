@@ -7,6 +7,7 @@ import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
 import {
+    validConfig,
     formUserName,
     formAbout,
     popupAdd,
@@ -18,16 +19,11 @@ import {
     popupPreview,
 } from "./constants.js";
 
-export const validator = new FormValidator({
-    formSelector: "form",
-    inputSelector: "form__input",
-    submitButtonSelector: "form__save-button",
-    inactiveButtonClass: "form__save-button-disabled",
-    inputErrorClass: "popup__error",
-    errorClass: "form__error_show",
-});
-validator.enableValidation();
+const PopupEditvalidator = new FormValidator(validConfig, popupEdit);
+PopupEditvalidator.enableValidation();
 
+const PopupAddValidator = new FormValidator(validConfig, popupAdd);
+PopupAddValidator.enableValidation();
 
 const popupWithImg = new PopupWithImage(popupPreview);
 popupWithImg.setEventListeners();
@@ -65,14 +61,14 @@ cardList.renderItem();
 
 profileAddButton.addEventListener("click", () => {
     savePopup.open();
-    validator.checkValid(popupAdd);
+    PopupAddValidator.checkValid();
 });
 profileEditButton.addEventListener("click", () => {
     const newUserData = userInf.getUserInfo();
     formUserName.value = newUserData.user;
     formAbout.value = newUserData.about;
     editPopup.open();
-    validator.checkValid(popupEdit);
+    PopupEditvalidator.checkValid();
 });
 
 function createCard(data) {
