@@ -1,11 +1,11 @@
 import "../pages/index.css";
 import { Card } from "./Card.js";
-import { initialCards } from "./initial-сards.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import UserInfo from "./UserInfo.js";
+import Api from "./Api";
 import {
     validConfig,
     formUserName,
@@ -17,7 +17,30 @@ import {
     cardContainer,
     defaultCardSelector,
     popupPreview,
+    apiUrl,
+    apiAuthKey,
 } from "./constants.js";
+const api = new Api({
+    url: apiUrl,
+    headers: {
+        authorization: apiAuthKey,
+        "Content-type": "application/json"
+    }
+});
+
+api.getUserInfo().then(res => {
+    userInf.setUserInfo({ userName: res.name, about: res.about });
+});
+
+api.getCards().then(res => {
+    res.forEach(card => {
+        createCard(card);
+    });
+})
+
+
+
+
 
 const PopupEditvalidator = new FormValidator(validConfig, popupEdit);
 PopupEditvalidator.enableValidation();
@@ -27,18 +50,20 @@ PopupAddValidator.enableValidation();
 
 const popupWithImg = new PopupWithImage(popupPreview);
 popupWithImg.setEventListeners();
-const userInf = new UserInfo("Жак-Ив Кусто", "Исследователь океана");
 
+const userInf = new UserInfo();
 const editPopup = new PopupWithForm({
         submit: ({ userName, about }) => {
-            userInf.setUserInfo({ userName, about });
-            editPopup.close();
+            api.setUserInfo(userName, about).then(res => {
+                userInf.setUserInfo({ userName, about });
+                editPopup.close();
+            });
+
         },
     },
     popupEdit
 );
 editPopup.setEventListeners();
-
 const savePopup = new PopupWithForm({
         submit: ({ imgName, link }) => {
             createCard({ name: imgName, link: link });
@@ -49,15 +74,7 @@ const savePopup = new PopupWithForm({
 );
 savePopup.setEventListeners();
 
-const cardList = new Section({
-        items: initialCards,
-        renderer: (item) => {
-            createCard(item);
-        },
-    },
-    cardContainer
-);
-cardList.renderItem();
+
 
 profileAddButton.addEventListener("click", () => {
     savePopup.open();
@@ -70,6 +87,15 @@ profileEditButton.addEventListener("click", () => {
     editPopup.open();
     PopupEditvalidator.checkValid();
 });
+const cardList = new Section({
+        items: [],
+        renderer: (item) => {
+            createCard(item);
+        },
+    },
+    cardContainer
+);
+cardList.renderItem();
 
 function createCard(data) {
     const card = new Card(data, defaultCardSelector, popupWithImg.open);

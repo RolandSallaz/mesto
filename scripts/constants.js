@@ -1,4 +1,4 @@
-export { validConfig, formAbout, formUserName, popupAdd, popupEdit, profileAddButton, profileEditButton, formCardName, formLink, cardContainer, defaultCardSelector, popupPreview };
+export { apiAuthKey, apiUrl, validConfig, formAbout, formUserName, popupAdd, popupEdit, profileAddButton, profileEditButton, formCardName, formLink, cardContainer, defaultCardSelector, popupPreview };
 const popupEdit = '.popup_name_edit'; // выбрал попап который редактирует профиль
 const popupAdd = '.popup_name_add'; // выбрал попап который добавляет карточку
 const profileAddButton = document.querySelector('.profile__add-button'); // кнопка с добавлением карточек
@@ -10,6 +10,8 @@ const formAbout = document.querySelector('.form__input_info_about');
 const cardContainer = document.querySelector(".elements"); // ceкция куда нужно добавить карточку
 const defaultCardSelector = "#card"
 const popupPreview = '.popup_name_image'; // выбрал попап с просмотром картинки
+const apiUrl = 'https://mesto.nomoreparties.co/v1/cohort-26/';
+const apiAuthKey = '6df61dab-da31-4f8e-8ce7-f211bdfa5ef2';
 const validConfig = {
     formSelector: "form",
     inputSelector: "form__input",

@@ -18,8 +18,8 @@
                 <img src="<%=require('./images/profile__image.jpg')%>" alt="Аватарка профиля" class="profile__avatar">
                 <div class="profile__info">
                     <div class="profile__content">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <p class="profile__subtitle">Исследователь океана</p>
+                        <h1 class="profile__name"></h1>
+                        <p class="profile__subtitle"></p>
                     </div>
                     <button class="profile__edit-button" aria-label="Редактировать профиль" type="button"></button>
                 </div>
@@ -40,11 +40,11 @@
                     <div class="form__container">
                         <h2 class="form__title">Редактировать профиль</h2>
                         <label>
-                        <input placeholder="Имя" type="text" name="userName" class="form__input form__input_info_name" id="form__input_info_name" value="Жак-Ив Кусто" required minlength="2" maxlength="40">
+                        <input placeholder="Имя" type="text" name="userName" class="form__input form__input_info_name" id="form__input_info_name" required minlength="2" maxlength="40">
                         <span class="form__error" id="form__input_info_name-error">Поле с ошибкой</span>
                     </label>
                         <label>
-                        <input placeholder="О себе" type="text" name="about" class="form__input form__input_info_about" id="form__input_info_about" value="Исследователь океана" required minlength="2" maxlength="200">
+                        <input placeholder="О себе" type="text" name="about" class="form__input form__input_info_about" id="form__input_info_about"  required minlength="2" maxlength="200">
                         <span class="form__error" id="form__input_info_about-error">Поле с ошибкой</span>
                     </label>
                         <button class="form__save-button" type="submit">Сохранить</button>

@@ -2,6 +2,7 @@ export class Card {
     constructor(data, selector, popupOpen) {
         this._name = data.name;
         this._link = data.link;
+        this._id = data._id;
         this._cardSelector = selector;
         this._popupOpen = popupOpen;
     }
@@ -14,6 +15,7 @@ export class Card {
     }
     createCard = () => {
         const card = this._getTemplate();
+        card.querySelector('.element').id = this._id;
         card.querySelector('.element__heading').textContent = this._name;
         card.querySelector('.element__image').setAttribute('src', this._link);
         card.querySelector('.element__image').setAttribute('alt', this._name);
