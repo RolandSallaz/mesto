@@ -122,7 +122,7 @@ profileEditButton.addEventListener("click", () => {
     editPopup.open();
     PopupEditvalidator.checkValid();
 });
-profileChangeAvatarButton.addEventListener('click', () => {
+userAvatar.addEventListener('click', () => {
     changeAvatatPopup.open()
     PopupEditvalidator.checkValid();
 })
