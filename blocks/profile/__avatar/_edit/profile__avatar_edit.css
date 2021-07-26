@@ -1,8 +1,18 @@
 .profile__avatar_edit {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: calc(100% + 1px);
+    height: calc(100% + 1px);
     background-image: url(../../../../images/profile_edit.svg);
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 50%;
+    opacity: 0;
+}
+
+.profile__avatar_edit:hover {
     background-color: black;
-    border: none;
+    opacity: 0.8;
+    cursor: pointer;
 }
