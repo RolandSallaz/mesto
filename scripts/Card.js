@@ -1,12 +1,19 @@
 export class Card {
-    constructor(data, selector, popupOpen) {
-        this._name = data.name;
-        this._link = data.link;
-        this._id = data._id;
+    constructor({ data, handleCardClick, handleLikeClick, handleDeleteIconClick }, selector) {
+        this._name = data.cardData.name;
+        this._link = data.cardData.link;
+        this._cardId = data.cardData._id;
+        this._userId = data.currentUserId;
+        this._ownerId = data.cardData.owner._id;
+        this._likes = data.cardData.likes;
         this._cardSelector = selector;
-        this._popupOpen = popupOpen;
+        this._getTemplate = this._getTemplate.bind(this);
+        this._handleCardClick = handleCardClick;
+        this._handleLikeClick = handleLikeClick;
+        this._handleDeleteIconClick = handleDeleteIconClick;
+
     }
-    _getTemplate = () => {
+    _getTemplate() {
         const cardElement = document
             .querySelector(this._cardSelector)
             .content
@@ -15,25 +22,31 @@ export class Card {
     }
     createCard = () => {
         const card = this._getTemplate();
-        card.querySelector('.element').id = this._id;
+        this._likes.forEach(person => { if (person._id === this._userId) card.querySelector('.element__like').classList.add("element__like_clicked") }); // что-бы иконка с лайком сохранялась после перезагрузки
+        card.querySelector('.element').classList.add(`element_id_${this._cardId}`);
+        card.querySelector('.element__deleteButton').classList.add(this._userId === this._ownerId ? 'element__deleteButton_visible' : 'element__deleteButton_hidden');
+        card.querySelector('.element__like-counter').textContent = this._likes.length;
         card.querySelector('.element__heading').textContent = this._name;
         card.querySelector('.element__image').setAttribute('src', this._link);
         card.querySelector('.element__image').setAttribute('alt', this._name);
         this._setEventListeners(card);
         return card;
+
     }
-    _setEventListeners = (element) => {
-        element.querySelector('.element__deleteButton').addEventListener('click', this._deleteCard);
-        element.querySelector('.element__like').addEventListener('click', this._toggleLike);
-        element.querySelector('.element__image').addEventListener('click', this.handleCardClick);
+    _updateLikes(count) {
+        document.querySelector(`.element_id_${this._cardId}`).querySelector('.element__like-counter').textContent = count;
     }
-    _deleteCard = (evt) => {
-        evt.target.closest('.element').remove();
+    _setEventListeners(element) {
+        element.querySelector('.element__deleteButton').addEventListener('click', () => { this._handleDeleteIconClick(this._cardId) });
+        element.querySelector('.element__like').addEventListener('click', (evt) => { this._toggleLike(evt) });
+        element.querySelector('.element__image').addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
     }
     _toggleLike = (evt) => {
-        evt.target.classList.toggle('element__like_clicked');
-    }
-    handleCardClick = () => {
-        this._popupOpen(this._name, this._link);
+        this._handleLikeClick(evt.target.classList.contains("element__like_clicked") ? { id: this._cardId, liked: true } : { id: this._cardId, liked: false }).
+        then(res => {
+            evt.target.classList.toggle('element__like_clicked');
+            this._updateLikes(res.likes.length)
+        });
+
     }
 }
