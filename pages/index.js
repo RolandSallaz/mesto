@@ -46,8 +46,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
         cards.forEach(item => {
             createCard(item);
         });
-    })
-    .catch(console.log('error in promises.all userinfo+getcard'));
+    }).catch(err => console.log(`Ошибка при загрузке карт и информации =>${err}`));
 
 const PopupEditvalidator = new FormValidator(validConfig, popupEdit);
 PopupEditvalidator.enableValidation();
@@ -69,7 +68,7 @@ const editPopup = new PopupWithForm({
                 userInf.setUserInfo({ userName, about });
                 userInf.updateInfo();
                 editPopup.close();
-            }).catch(err => console.log("Ошибка при редактировании"));
+            }).catch(err => console.log(`Ошибка при редактировании =>${err}`));
         },
     },
     popupEdit
@@ -83,7 +82,7 @@ const changeAvatatPopup = new PopupWithForm({
             userInf.setAvatar(res.avatar);
             userInf.updateInfo();
             changeAvatatPopup.close();
-        });
+        }).catch(err => console.log(`Ошибка при смене аватара =>${err}`));
     }
 }, popupAvatar);
 changeAvatatPopup.setEventListeners();
@@ -98,7 +97,7 @@ const savePopup = new PopupWithForm({
                 loading(false, popupAddSaveButton);
                 createCard(res);
                 savePopup.close();
-            });
+            }).catch(err => console.log(`Ошибка при редактировании =>${err}`));
         },
     },
     popupAdd
@@ -134,14 +133,14 @@ function createCard(cardData) {
                 then(() => {
                     deletePopup.close();
                     card.removeCard();
-                });
+                }).catch(err => console.log(`Ошибка при удалении карточки =>${err}`));
             });
         },
         handleLikeClick: ({ element, id }) => {
             if (!element.classList.contains("element__like_clicked")) {
-                api.setLike(id).then(res => card.updateLikes(res.likes.length));
+                api.setLike(id).then(res => card.updateLikes(res.likes.length)).catch(err => console.log(`Ошибка установки лайка =>${err}`));
             } else {
-                api.removeLike(id).then(res => card.updateLikes(res.likes.length));
+                api.removeLike(id).then(res => card.updateLikes(res.likes.length)).catch(err => console.log(`Ошибка удалении лайка =>${err}`));
             }
 
         }
