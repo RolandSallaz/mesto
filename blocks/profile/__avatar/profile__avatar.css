@@ -6,6 +6,7 @@
     background-image: url(../../../images/profile__image.jpg);
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
     border: none;
     background-color: black;
 }

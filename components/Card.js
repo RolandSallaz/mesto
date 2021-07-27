@@ -11,7 +11,6 @@ export class Card {
         this._handleCardClick = handleCardClick;
         this._handleLikeClick = handleLikeClick;
         this._handleDeleteIconClick = handleDeleteIconClick;
-
     }
     _getTemplate() {
         const cardElement = document
@@ -31,22 +30,24 @@ export class Card {
         card.querySelector('.element__image').setAttribute('alt', this._name);
         this._setEventListeners(card);
         return card;
-
     }
-    _updateLikes(count) {
-        document.querySelector(`.element_id_${this._cardId}`).querySelector('.element__like-counter').textContent = count;
+    getId() {
+        return this._cardId;
+    }
+    setElement(element) {
+        this._element = element;
+    }
+    removeCard() {
+        this._element.remove()
+    }
+    updateLikes(count) {
+        this._element.querySelector('.element__like-counter').textContent = count;
+        this._element.querySelector('.element__like').classList.toggle('element__like_clicked');
     }
     _setEventListeners(element) {
-        element.querySelector('.element__deleteButton').addEventListener('click', () => { this._handleDeleteIconClick(this._cardId) });
-        element.querySelector('.element__like').addEventListener('click', (evt) => { this._toggleLike(evt) });
+        element.querySelector('.element__deleteButton').addEventListener('click', () => { this._handleDeleteIconClick() });
+        element.querySelector('.element__like').addEventListener('click', (evt) => { this._handleLikeClick({ element: evt.target.closest('.element__like'), id: this._cardId }) });
         element.querySelector('.element__image').addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
     }
-    _toggleLike = (evt) => {
-        this._handleLikeClick(evt.target.classList.contains("element__like_clicked") ? { id: this._cardId, liked: true } : { id: this._cardId, liked: false }).
-        then(res => {
-            evt.target.classList.toggle('element__like_clicked');
-            this._updateLikes(res.likes.length)
-        });
 
-    }
 }

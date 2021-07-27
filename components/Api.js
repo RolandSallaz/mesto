@@ -3,6 +3,7 @@ export default class Api {
         this._url = config.url;
         this._headers = config.headers;
     }
+
     getUserInfo() {
         return fetch(`${this._url}users/me`, {
             headers: this._headers
@@ -11,7 +12,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in getUserInfo() status:${res.status}`);
-        }).then(res => { return res }).catch(err => console.log(err));
+        }).then(res => { return res });
     }
     setUserInfo(newName, newInfo) {
         return fetch(`${this._url}users/me`, {
@@ -23,7 +24,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in setUserInfo() status:${res.status}`);
-        }).catch(err => console.log(err));
+        });
     }
     getCards() {
         return fetch(`${this._url}cards`, {
@@ -33,7 +34,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in getCards() status:${res.status}`);
-        }).then(res => { return res }).catch(err => console.log(err));
+        }).then(res => { return res });
     }
     sendCard(name, link) {
         return fetch(`${this._url}cards`, {
@@ -45,7 +46,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in getCards() status:${res.status}`);
-        }).then(res => { return res }).catch(err => console.log(err));
+        }).then(res => { return res });
     }
     deleteCard(id) {
         return fetch(`${this._url}cards/${id}`, {
@@ -56,7 +57,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in deleteCard() status:${res.status}`);
-        }).then(res => { return res }).catch(err => console.log(err));
+        }).then(res => { return res });
     }
     setLike(id) {
         return fetch(`${this._url}cards/likes/${id}`, {
@@ -67,7 +68,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in setLike() status:${res.status}`);
-        }).then(res => { return res }).catch(err => console.log(err));
+        }).then(res => { return res });
     }
     removeLike(id) {
         return fetch(`${this._url}cards/likes/${id}`, {
@@ -78,7 +79,7 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in getLike() status:${res.status}`);
-        }).then(res => { return res }).catch(err => console.log(err));
+        }).then(res => { return res });
     }
     changerAvatar(avatar) {
         return fetch(`${this._url}users/me/avatar`, {
@@ -90,6 +91,6 @@ export default class Api {
                 return res.json();
             }
             return Promise.reject(`error in changeAvatar() status:${res.status}`);
-        }).then(res => { return res }).catch(err => console.log(err));
+        }).then(res => { return res });
     }
 }
