@@ -29,13 +29,11 @@ export class Card {
         card.querySelector('.element__image').setAttribute('src', this._link);
         card.querySelector('.element__image').setAttribute('alt', this._name);
         this._setEventListeners(card);
+        this._element = card.querySelector('.element');
         return card;
     }
     getId() {
         return this._cardId;
-    }
-    setElement(element) {
-        this._element = element;
     }
     removeCard() {
         this._element.remove()

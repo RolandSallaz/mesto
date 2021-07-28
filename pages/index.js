@@ -42,9 +42,8 @@ Promise.all([api.getUserInfo(), api.getCards()])
         userId = userData._id;
         userInf.setUserInfo({ userName: userData.name, about: userData.about });
         userInf.setAvatar(userData.avatar);
-        userInf.updateInfo();
         cards.forEach(item => {
-            createCard(item);
+            addCardToDom(createCard(item));
         });
     }).catch(err => console.log(`Ошибка при загрузке карт и информации =>${err}`));
 
@@ -66,7 +65,6 @@ const editPopup = new PopupWithForm({
             api.setUserInfo(userName, about).then(res => {
                 loading(false, popupEditSaveButton);
                 userInf.setUserInfo({ userName, about });
-                userInf.updateInfo();
                 editPopup.close();
             }).catch(err => console.log(`Ошибка при редактировании =>${err}`));
         },
@@ -80,7 +78,6 @@ const changeAvatatPopup = new PopupWithForm({
         api.changerAvatar(link).then(res => {
             loading(false, popupAvatarSaveButton);
             userInf.setAvatar(res.avatar);
-            userInf.updateInfo();
             changeAvatatPopup.close();
         }).catch(err => console.log(`Ошибка при смене аватара =>${err}`));
     }
@@ -93,9 +90,9 @@ deletePopup.setEventListeners();
 const savePopup = new PopupWithForm({
         submit: ({ imgName, link }) => {
             loading(true, popupAddSaveButton);
-            api.sendCard(imgName, link).then((res) => {
+            api.sendCard(imgName, link).then((card) => {
                 loading(false, popupAddSaveButton);
-                createCard(res);
+                addCardToDom(createCard(card));
                 savePopup.close();
             }).catch(err => console.log(`Ошибка при редактировании =>${err}`));
         },
@@ -145,13 +142,12 @@ function createCard(cardData) {
 
         }
     }, defaultCardSelector);
-    const generatedCard = card.createCard();
-    cardList.addItem(generatedCard);
-    card.setElement(document.querySelector(`.element_id_${cardData._id}`));
+    return card;
 }
 
-function rofl(card) {
-    console.log(card);
+function addCardToDom(card) {
+    const generatedCard = card.createCard();
+    cardList.addItem(generatedCard);
 }
 
 function loading(loaded, button) {
